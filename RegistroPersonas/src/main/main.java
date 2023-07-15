@@ -16,13 +16,26 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         try {
+            //instancias
             Register r=new Register();
-            //Persona p =new Persona("15","15","15","15","15"); 
+            Persona p =r.insertPersona();
             manejoArchivos mA=new manejoArchivos();
-            mA.guardarPersona(r.insertPersona());
-           
-            JOptionPane.showMessageDialog(null,  mA.archivoCompleto());
+            
+            //manejo de datos para registro por medio de JOptionPane
+            if (p!=null && mA.verificaExistencia(p.getId())==false) {
+               mA.guardarPersona(p);
+            }else if(p==null){
+            JOptionPane.showMessageDialog(null, "Datos incompletos.", "Error de registro", 0);
+            }else if(p!=null && mA.verificaExistencia(p.getId())==true){
+             JOptionPane.showMessageDialog(null, "Usuario ingresado previamente.", "Error de registro", 0);
+            }
+            
+            mA.actualizaLista();
+            if (!mA.archivoCompleto().isEmpty()) {
+                JOptionPane.showMessageDialog(null,  mA.archivoCompleto());
+            }
 
         } catch (IOException | ClassNotFoundException ex) {
               JOptionPane.showMessageDialog(null, ex.getMessage());

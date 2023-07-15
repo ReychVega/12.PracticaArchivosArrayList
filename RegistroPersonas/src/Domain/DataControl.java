@@ -6,6 +6,5 @@ package Domain;
  */
 public interface DataControl {
     String showData();
-    String returnData(String type); 
-    
+    String returnData(String type);     
 }

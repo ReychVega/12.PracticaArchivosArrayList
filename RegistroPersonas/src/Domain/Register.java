@@ -8,24 +8,28 @@ import javax.swing.JOptionPane;
  */
 public class Register {
     public Persona persona;
+    
     public Register() {
-       persona=new Persona(); 
+       persona=null; 
     }
         
     public Persona insertPersona() {
       
        try{ 
-        String id = JOptionPane.showInputDialog(null, "ingrese el ID");
-        String name = JOptionPane.showInputDialog(null, "ingrese el nombre");
-        String lastName = JOptionPane.showInputDialog(null, "ingrese el apellido");
-        String phone = JOptionPane.showInputDialog(null, "ingrese el telefono");
+        String id = JOptionPane.showInputDialog(null, "Ingrese el ID");
+        String name = JOptionPane.showInputDialog(null, "Ingrese el nombre");
+        String lastName = JOptionPane.showInputDialog(null, "Ingrese el apellido");
+        String phone = JOptionPane.showInputDialog(null, "Ingrese el telefono");
         String civilState = JOptionPane.showInputDialog(null, "ingrese el estado civil");
-        persona=new Persona(id, name, lastName,phone,civilState);
-        }catch( Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
         
-        return persona;
+           if (id!=null & name!=null & lastName!=null & phone!=null & civilState!=null
+                   & !id.isEmpty() & !name.isEmpty() & !lastName.isEmpty() & !phone.isEmpty() & !civilState.isEmpty()) {
+            persona=new Persona(id, name, lastName,phone,civilState);
+           }
+        }catch(Exception e){
+            return null;
+        }
+      return persona;
     }
 
     public Persona getPersona() {
@@ -36,7 +40,7 @@ public class Register {
         this.persona = persona;
     }
       
-     public void mostrar() {
+     public void mostrar() {        
         if (this.persona != null) {
             JOptionPane.showMessageDialog(null, this.persona.toString());
         }
